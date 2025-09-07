@@ -74,17 +74,23 @@ export const useFavoriteStore = defineStore('favorite', () => {
     return favoriteIds.value.includes(productId)
   }
   
+  // Убираем циклическую зависимость - используем lazy loading
   const favoriteProducts = computed(() => {
-    const productStore = useProductStore()
+    // Получаем store только когда нужно
+    const { $pinia } = useNuxtApp()
+    const productStore = $pinia ? useProductStore($pinia) : null
+    
+    if (!productStore) return []
+    
     return productStore.products.filter(product => 
       favoriteIds.value.includes(product.id)
     )
   })
   
   // Автоинициализация
-  if (process.client) {
+  onMounted(() => {
     initialize()
-  }
+  })
   
   return {
     favoriteIds: readonly(favoriteIds),
