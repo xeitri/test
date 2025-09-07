@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    @apply bg-black text-white overflow-x-hidden;
+  }
+}
+
+@layer components {
+  .category-btn {
+    @apply bg-gray-800 text-white px-4 py-2 rounded-xl text-sm font-medium 
+           hover:bg-gray-700 transition-colors duration-200 whitespace-nowrap;
+  }
+  
+  .category-btn.active {
+    @apply bg-white text-black;
+  }
+  
+  .bottom-nav-btn {
+    @apply flex flex-col items-center justify-center text-xs text-gray-400
+           hover:text-white transition-colors duration-200;
+  }
+  
+  .bottom-nav-btn.active {
+    @apply text-white;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
